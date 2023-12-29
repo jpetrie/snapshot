@@ -1,0 +1,74 @@
+================================================================================
+INTRODUCTION                                                          *snapshot*
+
+Snapshot augments Neovim's built-in session management functionality.
+
+
+CONFIGURATION
+
+Snapshot supports the following options:
+                                               *snapshot.options.session_dir*
+    session_dir: ~
+        The full path to the directory where Snapshot should store session data.
+        The default value is "session" underneath the "state" `standard-path`.
+
+                                               *snapshot.options.allow_paths*
+    allow_paths: ~
+        A list of full paths where automatic session save/load is allowed.
+        The default value is an empty list, which prevents Snapshot from
+        automatically saving or loading any sessions.
+
+                                            *snapshot.options.hooks.pre_save*
+    hooks.pre_save: ~            
+        A function invoked just prior to writing a session file. Will be called
+        with a single argument: the full path to the session file.
+        The default value is nil.
+                                           *snapshot.options.hooks.post_save*
+    hooks.post_save: ~            
+        A function invoked just after writing a session file. Will be called
+        with a single argument: the full path to the session file.
+        The default value is nil.
+
+                                            *snapshot.options.hooks.pre_load*
+    hooks.pre_load: ~            
+        A function invoked just prior to reading a session file. Will be called
+        with a single argument: the full path to the session file.
+        The default value is nil.
+                                           *snapshot.options.hooks.post_load*
+    hooks.post_load: ~            
+        A function invoked just after reading a session file. Will be called
+        with a single argument: the full path to the session file.
+        The default value is nil.
+
+
+COMMANDS
+
+Snapshot provides two commands:
+
+|SnapSave|
+    Saves the session for the current directory.
+
+|SnapLoad|
+    Loads the session for the current directory.
+
+
+LUA API
+
+Snapshot provides the following Lua API:
+
+|snapshot.setup({opts})|                                *snapshot.setup()*
+    Snapshot's setup function, which must be run by the user (if not using a
+    plugin manager that does so).
+
+    Usage:
+>lua
+    require("snapshot").setup({
+      -- options go here
+    })
+<
+
+|snapshot.save()|                                        *snapshot.save()*
+    Saves the session for the current directory, as with `:SnapSave`.
+
+|snapshot.load()|                                        *snapshot.load()*
+    Loads the session for the current directory, as with `:SnapLoad`.
