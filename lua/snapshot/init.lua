@@ -33,6 +33,11 @@ local function is_path_under(path, parent)
 end
 
 local function is_auto_allowed()
+  if #vim.api.nvim_list_uis() == 0 then
+    -- Do not perform automatic session management when headless.
+    return false
+  end
+
   local current_dir = vim.loop.cwd()
   for _, allowed in ipairs(snapshot.options.allow_paths) do
     allowed = vim.fn.fnamemodify(allowed, ":p")

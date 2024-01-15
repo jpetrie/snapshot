@@ -10,7 +10,9 @@ few convenience features:
    working directory.
  - Opt-in automatic saving and loading of sessions (on |VimEnter| and
    |VimLeavePre|, respectively) under a set of allowed directories. Automatic
-   session load is skipped when the argument list is non-empty.
+   session load is skipped when the argument list is non-empty. When Neovim
+   is started headless (no attached UIs), automatic save and load will both
+   be skipped.
 
 
 CONFIGURATION                                                 *snapshot.options*
