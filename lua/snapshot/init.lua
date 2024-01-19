@@ -75,24 +75,28 @@ function snapshot.setup(options)
   vim.api.nvim_create_autocmd("VimLeavePre", {callback = try_autosave_session})
 end
 
-function snapshot.session_file()
+local function session_file()
   local name = vim.loop.cwd()
-  name = string.gsub(name, directory_seperator_pattern, "%%")
+  if name == nil then
+    return nil
+  end
 
-  return snapshot.options.session_dir .. name .. ".vim"
+  return snapshot.options.session_dir .. string.gsub(name, directory_seperator_pattern, "%%") .. ".vim"
 end
 
 function snapshot.save()
-  local path = snapshot.session_file()
-  snapshot.options.hooks.pre_save(path)
-  vim.fn.mkdir(snapshot.options.session_dir, "p")
-  vim.cmd("mksession! " .. vim.fn.fnameescape(path))
-  snapshot.options.hooks.post_save(path)
+  local path = session_file()
+  if path ~= nil then
+    snapshot.options.hooks.pre_save(path)
+    vim.fn.mkdir(snapshot.options.session_dir, "p")
+    vim.cmd("mksession! " .. vim.fn.fnameescape(path))
+    snapshot.options.hooks.post_save(path)
+  end
 end
 
 function snapshot.load()
-  local path = snapshot.session_file()
-  if vim.fn.filereadable(path) == 1 then
+  local path = session_file()
+  if path and vim.fn.filereadable(path) == 1 then
     snapshot.options.hooks.pre_load(path)
     vim.cmd("silent! source " .. vim.fn.fnameescape(path))
     snapshot.options.hooks.post_load(path)
