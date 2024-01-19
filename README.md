@@ -9,7 +9,8 @@ specifying a set of absolute paths under which the feature should be enabled.
 Install via your plugin manager of choice. For example, via [`lazy.nvim`](https://github.com/folke/lazy.nvim):
 
 ```lua
-{ "jpetrie/snapshot",
+{
+  "jpetrie/snapshot",
   opts = {
     session_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/session/"),
     allow_paths = {},
