@@ -30,7 +30,7 @@ Snapshot supports the following options:
         automatically saving or loading any sessions.
 
                                                *snapshot.options.hooks.pre_save*
-    hookspre_save: ~
+    hooks.pre_save: ~
         A function invoked just prior to writing a session file. Will be called
         with a single argument: the full path to the session file.
         The default value is nil.
