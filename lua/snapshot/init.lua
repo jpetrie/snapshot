@@ -38,7 +38,7 @@ local function is_auto_allowed()
     return false
   end
 
-  local current_dir = vim.loop.cwd()
+  local current_dir = vim.uv.cwd()
   for _, allowed in ipairs(snapshot.options.allow_paths) do
     allowed = vim.fn.fnamemodify(allowed, ":p")
     if is_path_under(current_dir, allowed) then
@@ -76,7 +76,7 @@ function snapshot.setup(options)
 end
 
 local function session_file()
-  local name = vim.loop.cwd()
+  local name = vim.uv.cwd()
   if name == nil then
     return nil
   end
