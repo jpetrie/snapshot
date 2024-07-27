@@ -12,7 +12,7 @@ Install via your plugin manager of choice. For example, via [`lazy.nvim`](https:
 {
   "jpetrie/snapshot",
   opts = {
-    session_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/session/"),
+    session_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/session/"),
     allow_paths = {},
   }
 }
